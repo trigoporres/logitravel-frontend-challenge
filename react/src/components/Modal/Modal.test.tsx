@@ -80,6 +80,47 @@ describe("Modal", () => {
     });
   });
 
+  describe("error state", () => {
+    it("shows an error message when submitting empty", () => {
+      render(<Modal isOpen={true} onClose={vi.fn()} onAddItem={vi.fn()} />);
+
+      fireEvent.click(screen.getByText("Add"));
+
+      expect(screen.getByText("This field cannot be empty.")).toBeInTheDocument();
+    });
+
+    it("applies error class to the input when submitting empty", () => {
+      render(<Modal isOpen={true} onClose={vi.fn()} onAddItem={vi.fn()} />);
+
+      fireEvent.click(screen.getByText("Add"));
+
+      expect(screen.getByPlaceholderText("Type the text here...")).toHaveClass("modal__input--error");
+    });
+
+    it("clears the error when the user starts typing", () => {
+      render(<Modal isOpen={true} onClose={vi.fn()} onAddItem={vi.fn()} />);
+      fireEvent.click(screen.getByText("Add"));
+
+      fireEvent.change(screen.getByPlaceholderText("Type the text here..."), {
+        target: { value: "h" },
+      });
+
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    });
+
+    it("clears the error when Cancel is clicked", () => {
+      const onClose = vi.fn();
+      render(<Modal isOpen={true} onClose={onClose} onAddItem={vi.fn()} />);
+      fireEvent.click(screen.getByText("Add"));
+      expect(screen.getByText("This field cannot be empty.")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText("Cancel"));
+
+      expect(screen.queryByText("This field cannot be empty.")).not.toBeInTheDocument();
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe("cancel", () => {
     it("calls onClose when Cancel is clicked", () => {
       const onClose = vi.fn();

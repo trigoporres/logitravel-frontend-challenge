@@ -10,6 +10,7 @@ interface ModalProps {
 export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [value, setValue] = useState("");
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -26,15 +27,19 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
 
   const handleClose = () => {
     setValue("");
+    setHasError(false);
     onClose();
   };
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     event.preventDefault();
     const trimmed = value.trim();
-    if (!trimmed) return;
+    if (!trimmed) {
+      setHasError(true);
+      return;
+    }
     onAddItem(trimmed);
-    onClose();
+    handleClose();
   };
 
   return (
@@ -48,11 +53,17 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
           id="new-item-input"
           type="text"
           placeholder="Type the text here..."
-          className="modal__input"
+          className={`modal__input${hasError ? " modal__input--error" : ""}`}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => { setValue(e.target.value); setHasError(false); }}
           autoFocus
+          aria-describedby={hasError ? "input-error" : undefined}
         />
+        {hasError && (
+          <p id="input-error" className="modal__error" role="alert">
+            This field cannot be empty.
+          </p>
+        )}
         <div className="modal__actions">
           <button type="submit" className="modal__btn modal__btn--primary">Add</button>
           <button type="button" className="modal__btn modal__btn--secondary" onClick={handleClose}>

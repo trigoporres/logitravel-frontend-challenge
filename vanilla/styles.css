@@ -135,6 +135,17 @@ body {
   margin-bottom: 16px;
 }
 
+.modal__input--error {
+  border-color: #e53e3e;
+  background-color: #fff5f5;
+}
+
+.modal__error {
+  color: #e53e3e;
+  font-size: 0.8rem;
+  margin: -10px 0 12px;
+}
+
 #item-modal div {
   display: flex;
   justify-content: flex-end;
