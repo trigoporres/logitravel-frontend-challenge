@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "./Card.css";
 
 interface CardProps {
@@ -21,6 +22,24 @@ export const Card = ({
   onRemoveSelected,
   onUndo,
 }: CardProps) => {
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleClick = (index: number) => {
+    if (clickTimerRef.current !== null) clearTimeout(clickTimerRef.current);
+    clickTimerRef.current = setTimeout(() => {
+      onToggleSelect(index);
+      clickTimerRef.current = null;
+    }, 250);
+  };
+
+  const handleDoubleClick = (index: number) => {
+    if (clickTimerRef.current !== null) {
+      clearTimeout(clickTimerRef.current);
+      clickTimerRef.current = null;
+    }
+    onDoubleClickItem(index);
+  };
+
   return (
     <>
       <section className="card__content">
@@ -30,8 +49,8 @@ export const Card = ({
               <li
                 key={crypto.randomUUID()}
                 className={selected.has(index) ? "list-item--active" : ""}
-                onClick={() => onToggleSelect(index)}
-                onDoubleClick={() => onDoubleClickItem(index)}
+                onClick={() => handleClick(index)}
+                onDoubleClick={() => handleDoubleClick(index)}
               >
                 {item}
               </li>

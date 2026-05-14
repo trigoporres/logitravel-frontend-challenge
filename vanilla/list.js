@@ -2,6 +2,7 @@ const createList = (listElement, removeButton, undoButton) => {
   const items = [];
   const selected = new Set();
   const history = [];
+  let clickTimer = null;
 
   const renderItems = () => {
     listElement.replaceChildren(
@@ -25,19 +26,25 @@ const createList = (listElement, removeButton, undoButton) => {
   listElement.addEventListener("click", (event) => {
     const li = event.target.closest("li");
     if (!li) return;
-    const index = [...listElement.children].indexOf(li);
-    if (selected.has(index)) {
-      selected.delete(index);
-    } else {
-      selected.add(index);
-    }
-    li.classList.toggle("list-item--active", selected.has(index));
-    removeButton.disabled = selected.size === 0;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => {
+      const index = [...listElement.children].indexOf(li);
+      if (selected.has(index)) {
+        selected.delete(index);
+      } else {
+        selected.add(index);
+      }
+      li.classList.toggle("list-item--active", selected.has(index));
+      removeButton.disabled = selected.size === 0;
+      clickTimer = null;
+    }, 250);
   });
 
   listElement.addEventListener("dblclick", (event) => {
     const li = event.target.closest("li");
     if (!li) return;
+    clearTimeout(clickTimer);
+    clickTimer = null;
     const index = [...listElement.children].indexOf(li);
     history.push({ type: "remove", removed: [{ index, value: items[index] }] });
     items.splice(index, 1);
