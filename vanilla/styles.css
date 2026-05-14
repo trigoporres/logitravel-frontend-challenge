@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
   margin: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .card {
@@ -38,6 +38,8 @@ body {
   margin-bottom: 16px;
   border: 1px solid #ccc;
   min-height: 120px;
+  max-height: 260px;
+  overflow-y: auto;
   position: relative;
 }
 
