@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Proof</title>
+  </head>
+  <body>
+    <main class="card">
+      <header class="card__header">
+        <h1>Este es una prueba técnica</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipiscing, elit mus primis nec
+          inceptos. Lacinia habitasse arcu molestie maecenas cursus quam nunc,
+          hendrerit posuere augue fames dictumst placerat porttitor, dis mi
+          pharetra vestibulum venenatis phasellus.
+        </p>
+      </header>
+
+      <section class="card__content">
+        <div class="list-container">
+          <ul id="item-list"></ul>
+        </div>
+      </section>
+
+      <footer class="card__actions">
+        <button type="button" aria-label="Volver">↺</button>
+        <button type="button">Eliminar</button>
+        <button type="button" id="open-modal-button">Agregar</button>
+      </footer>
+    </main>
+
+    <dialog id="item-modal">
+      <form method="dialog">
+        <label for="new-item-input">Nuevo item</label>
+        <input id="new-item-input" type="text" />
+        <div>
+          <button type="submit" id="add-item-button">Agregar</button>
+          <button type="button" id="cancel-modal-button">Cancelar</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
