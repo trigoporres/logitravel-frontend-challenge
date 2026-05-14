@@ -12,6 +12,8 @@ const createList = (listElement, removeButton, undoButton) => {
         return li;
       }),
     );
+    removeButton.disabled = selected.size === 0;
+    undoButton.disabled = history.length === 0;
   };
 
   const addItem = (value) => {
@@ -30,6 +32,7 @@ const createList = (listElement, removeButton, undoButton) => {
       selected.add(index);
     }
     li.classList.toggle("list-item--active", selected.has(index));
+    removeButton.disabled = selected.size === 0;
   });
 
   listElement.addEventListener("dblclick", (event) => {
