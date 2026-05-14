@@ -42,23 +42,21 @@ export function useList() {
   };
 
   const undo = () => {
-    setHistory((prev) => {
-      const last = prev.at(-1);
-      if (!last) return prev;
-      if (last.type === "add") {
-        setItems((p) => p.slice(0, -1));
-      } else {
-        setItems((p) => {
-          const next = [...p];
-          [...last.removed]
-            .sort((a, b) => a.index - b.index)
-            .forEach(({ index, value }) => next.splice(index, 0, value));
-          return next;
-        });
-      }
-      setSelected(new Set());
-      return prev.slice(0, -1);
-    });
+    const last = history.at(-1);
+    if (!last) return;
+    if (last.type === "add") {
+      setItems((p) => p.slice(0, -1));
+    } else {
+      setItems((p) => {
+        const next = [...p];
+        [...last.removed]
+          .sort((a, b) => a.index - b.index)
+          .forEach(({ index, value }) => next.splice(index, 0, value));
+        return next;
+      });
+    }
+    setSelected(new Set());
+    setHistory((prev) => prev.slice(0, -1));
   };
 
   return {
