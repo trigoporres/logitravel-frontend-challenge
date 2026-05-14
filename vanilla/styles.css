@@ -109,9 +109,9 @@ body {
   min-width: 460px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   position: fixed;
-  top: 50%;
+  top: 80px;
   left: 50%;
-  transform: translate(-50%, -210%);
+  transform: translateX(-50%);
   margin: 0;
 }
 
