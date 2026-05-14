@@ -45,7 +45,7 @@ export const Card = ({
     <>
       <section className="card__content">
         <div className="list-container">
-          <ul id="item-list">
+          <ul className="item-list">
             {items.map((item, index) => (
               <li
                 key={item.id}
@@ -65,7 +65,7 @@ export const Card = ({
           <button
             type="button"
             aria-label="Undo"
-            id="undo-item-button"
+            className="card__btn card__btn--secondary"
             onClick={onUndo}
             disabled={!canUndo}
           >
@@ -73,14 +73,18 @@ export const Card = ({
           </button>
           <button
             type="button"
-            id="remove-item-button"
+            className="card__btn card__btn--secondary"
             onClick={onRemoveSelected}
             disabled={selected.size === 0}
           >
             Delete
           </button>
         </div>
-        <button type="button" id="open-modal-button" onClick={onOpenModal}>
+        <button
+          type="button"
+          className="card__btn card__btn--primary"
+          onClick={onOpenModal}
+        >
           Add
         </button>
       </footer>

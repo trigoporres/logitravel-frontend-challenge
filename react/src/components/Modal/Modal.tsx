@@ -20,6 +20,9 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
     } else {
       dialog.close();
     }
+    return () => {
+      if (dialog.open) dialog.close();
+    };
   }, [isOpen]);
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
@@ -31,7 +34,7 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
   };
 
   return (
-    <dialog ref={dialogRef} aria-labelledby="modal-title" onClose={onClose}>
+    <dialog ref={dialogRef} className="modal" aria-labelledby="modal-title" onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <h2 id="modal-title">Add item to list</h2>
         <label htmlFor="new-item-input" className="sr-only">
@@ -41,13 +44,14 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
           id="new-item-input"
           type="text"
           placeholder="Type the text here..."
+          className="modal__input"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           autoFocus
         />
-        <div>
-          <button type="submit" id="add-item-button">Add</button>
-          <button type="button" id="cancel-modal-button" onClick={onClose}>
+        <div className="modal__actions">
+          <button type="submit" className="modal__btn modal__btn--primary">Add</button>
+          <button type="button" className="modal__btn modal__btn--secondary" onClick={onClose}>
             Cancel
           </button>
         </div>

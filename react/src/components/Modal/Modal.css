@@ -1,4 +1,4 @@
-dialog {
+.modal {
   border: none;
   border-radius: 12px;
   padding: 24px;
@@ -11,14 +11,14 @@ dialog {
   margin: 0;
 }
 
-dialog h2 {
+.modal h2 {
   margin: 0 0 16px;
   font-size: 0.95rem;
   font-weight: normal;
   color: #333;
 }
 
-#new-item-input {
+.modal__input {
   width: 100%;
   padding: 10px 14px;
   border: 1px solid #ddd;
@@ -29,27 +29,26 @@ dialog h2 {
   margin-bottom: 16px;
 }
 
-dialog div {
+.modal__actions {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
 }
 
-#add-item-button,
-#cancel-modal-button {
+.modal__btn {
   padding: 8px 20px;
   border-radius: 999px;
   font-size: 0.875rem;
   cursor: pointer;
 }
 
-#add-item-button {
+.modal__btn--primary {
   background-color: #324bff;
   color: white;
   border: none;
 }
 
-#cancel-modal-button {
+.modal__btn--secondary {
   background-color: transparent;
   color: #324bff;
   border: 1px solid #324bff;

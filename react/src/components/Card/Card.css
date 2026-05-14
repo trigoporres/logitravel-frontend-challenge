@@ -6,7 +6,7 @@
   position: relative;
 }
 
-#item-list:empty::after {
+.item-list:empty::after {
   content: "No items";
   position: absolute;
   inset: 0;
@@ -28,47 +28,43 @@
   gap: 8px;
 }
 
-#item-list {
+.item-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-#item-list li {
+.item-list li {
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 4px;
 }
 
-#item-list li.list-item--active {
+.item-list li.list-item--active {
   background-color: #324bff;
   color: white;
 }
 
-#open-modal-button,
-#remove-item-button,
-#undo-item-button {
+.card__btn {
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 0.875rem;
   cursor: pointer;
 }
 
-#open-modal-button {
+.card__btn--primary {
   background-color: #324bff;
   color: white;
   border: none;
 }
 
-#remove-item-button,
-#undo-item-button {
+.card__btn--secondary {
   background-color: transparent;
   color: #324bff;
   border: 1px solid #324bff;
 }
 
-#remove-item-button:disabled,
-#undo-item-button:disabled {
+.card__btn--secondary:disabled {
   color: #aaa;
   border-color: #aaa;
   cursor: not-allowed;
