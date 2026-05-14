@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technical Proof</title>
+    <style>
+      #item-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #item-list li {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      #item-list li.list-item--active {
+        background-color: #0066cc;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <main class="card">
@@ -24,8 +42,10 @@
       </section>
 
       <footer class="card__actions">
-        <button type="button" aria-label="Volver">↺</button>
-        <button type="button">Eliminar</button>
+        <button type="button" aria-label="Volver" id="undo-item-button">
+          ↺
+        </button>
+        <button type="button" id="remove-item-button">Eliminar</button>
         <button type="button" id="open-modal-button">Agregar</button>
       </footer>
     </main>
@@ -40,6 +60,7 @@
         </div>
       </form>
     </dialog>
+    <script src="list.js"></script>
     <script src="modal.js"></script>
   </body>
 </html>
