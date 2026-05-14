@@ -1,4 +1,8 @@
-export const Card = () => {
+interface CardProps {
+  onOpenModal: () => void;
+}
+
+export const Card = ({ onOpenModal }: CardProps) => {
   return (
     <>
       <section className="card__content">
@@ -16,7 +20,7 @@ export const Card = () => {
             Delete
           </button>
         </div>
-        <button type="button" id="open-modal-button">
+        <button type="button" onClick={onOpenModal}>
           Add
         </button>
       </footer>
