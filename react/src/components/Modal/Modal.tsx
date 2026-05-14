@@ -15,7 +15,6 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
     const dialog = dialogRef.current;
     if (!dialog) return;
     if (isOpen) {
-      setValue("");
       dialog.showModal();
     } else {
       dialog.close();
@@ -24,6 +23,11 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
       if (dialog.open) dialog.close();
     };
   }, [isOpen]);
+
+  const handleClose = () => {
+    setValue("");
+    onClose();
+  };
 
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     event.preventDefault();
@@ -34,7 +38,7 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
   };
 
   return (
-    <dialog ref={dialogRef} className="modal" aria-labelledby="modal-title" onClose={onClose}>
+    <dialog ref={dialogRef} className="modal" aria-labelledby="modal-title" onClose={handleClose}>
       <form onSubmit={handleSubmit}>
         <h2 id="modal-title">Add item to list</h2>
         <label htmlFor="new-item-input" className="sr-only">
@@ -51,7 +55,7 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
         />
         <div className="modal__actions">
           <button type="submit" className="modal__btn modal__btn--primary">Add</button>
-          <button type="button" className="modal__btn modal__btn--secondary" onClick={onClose}>
+          <button type="button" className="modal__btn modal__btn--secondary" onClick={handleClose}>
             Cancel
           </button>
         </div>
