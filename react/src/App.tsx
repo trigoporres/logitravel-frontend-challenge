@@ -1,24 +1,32 @@
 import { useState } from "react";
 import "./App.css";
 import { Card, Header, Modal } from "./components";
+import { useList } from "./hooks/useList";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleAddItem = (value: string) => {
-    console.log("add item:", value);
-  };
+  const { items, selected, canUndo, addItem, toggleSelect, removeByDoubleClick, removeSelected, undo } =
+    useList();
 
   return (
     <>
       <main className="card">
         <Header />
-        <Card onOpenModal={() => setIsModalOpen(true)} />
+        <Card
+          items={items}
+          selected={selected}
+          canUndo={canUndo}
+          onOpenModal={() => setIsModalOpen(true)}
+          onToggleSelect={toggleSelect}
+          onDoubleClickItem={removeByDoubleClick}
+          onRemoveSelected={removeSelected}
+          onUndo={undo}
+        />
       </main>
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onAddItem={handleAddItem}
+        onAddItem={addItem}
       />
     </>
   );
