@@ -26,20 +26,19 @@ export function useList() {
   };
 
   const removeByDoubleClick = (index: number) => {
-    setHistory((prev) => [
-      ...prev,
-      { type: "remove", removed: [{ index, item: items[index] }] },
-    ]);
+    const item = items[index];
     setItems((prev) => prev.filter((_, i) => i !== index));
+    setHistory((prev) => [...prev, { type: "remove", removed: [{ index, item }] }]);
     setSelected(new Set());
   };
 
   const removeSelected = () => {
     if (selected.size === 0) return;
-    const removed = [...selected]
+    const selectedSnapshot = new Set(selected);
+    const removed = [...selectedSnapshot]
       .sort((a, b) => b - a)
       .map((i) => ({ index: i, item: items[i] }));
-    setItems((prev) => prev.filter((_, i) => !selected.has(i)));
+    setItems((prev) => prev.filter((_, i) => !selectedSnapshot.has(i)));
     setHistory((prev) => [...prev, { type: "remove", removed }]);
     setSelected(new Set());
   };
