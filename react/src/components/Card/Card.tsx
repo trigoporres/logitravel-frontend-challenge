@@ -1,3 +1,5 @@
+import "./Card.css";
+
 interface CardProps {
   items: string[];
   selected: Set<number>;
@@ -58,7 +60,7 @@ export const Card = ({
             Delete
           </button>
         </div>
-        <button type="button" onClick={onOpenModal}>
+        <button type="button" id="open-modal-button" onClick={onOpenModal}>
           Add
         </button>
       </footer>

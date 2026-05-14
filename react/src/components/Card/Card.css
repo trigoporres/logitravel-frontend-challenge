@@ -1,0 +1,68 @@
+.list-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  min-height: 120px;
+  position: relative;
+}
+
+#item-list:empty::after {
+  content: "No items";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.875rem;
+}
+
+.card__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card__actions-left {
+  display: flex;
+  gap: 8px;
+}
+
+#item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#item-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#item-list li.list-item--active {
+  background-color: #324bff;
+  color: white;
+}
+
+#open-modal-button,
+#remove-item-button,
+#undo-item-button {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+#open-modal-button {
+  background-color: #324bff;
+  color: white;
+  border: none;
+}
+
+#remove-item-button,
+#undo-item-button {
+  background-color: transparent;
+  color: #324bff;
+  border: 1px solid #324bff;
+}

@@ -1,0 +1,56 @@
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 460px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -210%);
+  margin: 0;
+}
+
+dialog h2 {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: #333;
+}
+
+#new-item-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+dialog div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#add-item-button,
+#cancel-modal-button {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+#add-item-button {
+  background-color: #324bff;
+  color: white;
+  border: none;
+}
+
+#cancel-modal-button {
+  background-color: transparent;
+  color: #324bff;
+  border: 1px solid #324bff;
+}

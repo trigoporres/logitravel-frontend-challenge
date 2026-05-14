@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "./Modal.css";
 
 interface ModalProps {
   isOpen: boolean;
@@ -45,8 +46,8 @@ export const Modal = ({ isOpen, onClose, onAddItem }: ModalProps) => {
           autoFocus
         />
         <div>
-          <button type="submit">Add</button>
-          <button type="button" onClick={onClose}>
+          <button type="submit" id="add-item-button">Add</button>
+          <button type="button" id="cancel-modal-button" onClick={onClose}>
             Cancel
           </button>
         </div>
