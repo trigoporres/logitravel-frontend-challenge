@@ -1,32 +1,15 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Technical Proof</title>
-    <style>
-      #item-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      #item-list li {
-        padding: 8px 12px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-
-      #item-list li.list-item--active {
-        background-color: #0066cc;
-        color: white;
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="card">
       <header class="card__header">
-        <h1>Este es una prueba técnica</h1>
+        <h1>This is a technical proof</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipiscing, elit mus primis nec
           inceptos. Lacinia habitasse arcu molestie maecenas cursus quam nunc,
@@ -42,21 +25,28 @@
       </section>
 
       <footer class="card__actions">
-        <button type="button" aria-label="Volver" id="undo-item-button">
-          ↺
-        </button>
-        <button type="button" id="remove-item-button">Eliminar</button>
-        <button type="button" id="open-modal-button">Agregar</button>
+        <div class="card__actions-left">
+          <button type="button" aria-label="Undo" id="undo-item-button">
+            ↺
+          </button>
+          <button type="button" id="remove-item-button">Delete</button>
+        </div>
+        <button type="button" id="open-modal-button">Add</button>
       </footer>
     </main>
 
-    <dialog id="item-modal">
+    <dialog id="item-modal" aria-labelledby="modal-title">
       <form method="dialog">
-        <label for="new-item-input">Nuevo item</label>
-        <input id="new-item-input" type="text" />
+        <h2 id="modal-title">Add item to list</h2>
+        <label for="new-item-input" class="sr-only">New item</label>
+        <input
+          id="new-item-input"
+          type="text"
+          placeholder="Type the text here..."
+        />
         <div>
-          <button type="submit" id="add-item-button">Agregar</button>
-          <button type="button" id="cancel-modal-button">Cancelar</button>
+          <button type="submit" id="add-item-button">Add</button>
+          <button type="button" id="cancel-modal-button">Cancel</button>
         </div>
       </form>
     </dialog>

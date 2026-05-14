@@ -1,0 +1,160 @@
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #bde3fb, #a5c8fd);
+  min-height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.card {
+  max-width: 600px;
+  margin: 120px auto;
+  padding: 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card__header {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.list-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  min-height: 120px;
+  position: relative;
+}
+
+#item-list:empty::after {
+  content: "No items";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.875rem;
+}
+
+.card__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card__actions-left {
+  display: flex;
+  gap: 8px;
+}
+
+#item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#item-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#item-list li.list-item--active {
+  background-color: #324bff;
+  color: white;
+}
+
+#open-modal-button,
+#remove-item-button,
+#undo-item-button {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+#open-modal-button {
+  background-color: #324bff;
+  color: white;
+  border: none;
+}
+
+#remove-item-button,
+#undo-item-button {
+  background-color: transparent;
+  color: #324bff;
+  border: 1px solid #324bff;
+}
+
+#item-modal {
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 460px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -210%);
+  margin: 0;
+}
+
+#item-modal h2 {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: #333;
+}
+
+#new-item-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+#item-modal div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#add-item-button,
+#cancel-modal-button {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+#add-item-button {
+  background-color: #324bff;
+  color: white;
+  border: none;
+}
+
+#cancel-modal-button {
+  background-color: transparent;
+  color: #324bff;
+  border: 1px solid #324bff;
+}
