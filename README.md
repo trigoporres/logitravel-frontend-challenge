@@ -35,12 +35,16 @@ La app permite añadir y eliminar entradas de texto de una lista, con validacion
 
 ### Vanilla JS
 
+🔗 https://logitravel-frontend-challenge-45y6.vercel.app/
+
 ```bash
-# Abrir directamente en el navegador
+# O abrir directamente en el navegador
 open vanilla/index.html
 ```
 
 ### React
+
+🔗 https://logitravel-frontend-challenge.vercel.app/
 
 ```bash
 cd react
