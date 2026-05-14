@@ -1,16 +1,19 @@
 import { useState } from "react";
 
+export type Item = { id: string; value: string };
+
 type HistoryEntry =
   | { type: "add" }
-  | { type: "remove"; removed: { index: number; value: string }[] };
+  | { type: "remove"; removed: { index: number; item: Item }[] };
 
 export function useList() {
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const addItem = (value: string) => {
-    setItems((prev) => [...prev, value]);
+    const newItem: Item = { id: crypto.randomUUID(), value };
+    setItems((prev) => [...prev, newItem]);
     setHistory((prev) => [...prev, { type: "add" }]);
   };
 
@@ -25,7 +28,7 @@ export function useList() {
   const removeByDoubleClick = (index: number) => {
     setHistory((prev) => [
       ...prev,
-      { type: "remove", removed: [{ index, value: items[index] }] },
+      { type: "remove", removed: [{ index, item: items[index] }] },
     ]);
     setItems((prev) => prev.filter((_, i) => i !== index));
     setSelected(new Set());
@@ -35,7 +38,7 @@ export function useList() {
     if (selected.size === 0) return;
     const removed = [...selected]
       .sort((a, b) => b - a)
-      .map((i) => ({ index: i, value: items[i] }));
+      .map((i) => ({ index: i, item: items[i] }));
     setItems((prev) => prev.filter((_, i) => !selected.has(i)));
     setHistory((prev) => [...prev, { type: "remove", removed }]);
     setSelected(new Set());
@@ -51,7 +54,7 @@ export function useList() {
         const next = [...p];
         [...last.removed]
           .sort((a, b) => a.index - b.index)
-          .forEach(({ index, value }) => next.splice(index, 0, value));
+          .forEach(({ index, item }) => next.splice(index, 0, item));
         return next;
       });
     }

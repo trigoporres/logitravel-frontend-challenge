@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import "./Card.css";
+import type { Item } from "../../hooks/useList";
 
 interface CardProps {
-  items: string[];
+  items: Item[];
   selected: Set<number>;
   canUndo: boolean;
   onOpenModal: () => void;
@@ -47,12 +48,12 @@ export const Card = ({
           <ul id="item-list">
             {items.map((item, index) => (
               <li
-                key={crypto.randomUUID()}
+                key={item.id}
                 className={selected.has(index) ? "list-item--active" : ""}
                 onClick={() => handleClick(index)}
                 onDoubleClick={() => handleDoubleClick(index)}
               >
-                {item}
+                {item.value}
               </li>
             ))}
           </ul>

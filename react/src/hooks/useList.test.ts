@@ -2,6 +2,8 @@ import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 import { useList } from "./useList";
 
+const values = (items: { value: string }[]) => items.map((i) => i.value);
+
 describe("useList", () => {
   describe("initial state", () => {
     it("starts with empty items, no selection, and undo disabled", () => {
@@ -40,11 +42,22 @@ describe("useList", () => {
         result.current.addItem("cherry");
       });
       act(() => result.current.removeByDoubleClick(1));
-      expect(result.current.items).toEqual(["apple", "cherry"]);
+      expect(values(result.current.items)).toEqual(["apple", "cherry"]);
 
       act(() => result.current.undo());
 
-      expect(result.current.items).toEqual(["apple", "banana", "cherry"]);
+      expect(values(result.current.items)).toEqual(["apple", "banana", "cherry"]);
+    });
+
+    it("restores the same item instance (stable id) after undo", () => {
+      const { result } = renderHook(() => useList());
+      act(() => result.current.addItem("apple"));
+      const originalId = result.current.items[0].id;
+
+      act(() => result.current.removeByDoubleClick(0));
+      act(() => result.current.undo());
+
+      expect(result.current.items[0].id).toBe(originalId);
     });
 
     it("reverses a removeSelected, restoring multiple items at their original indices", () => {
@@ -57,11 +70,11 @@ describe("useList", () => {
         result.current.toggleSelect(2);
       });
       act(() => result.current.removeSelected());
-      expect(result.current.items).toEqual(["banana"]);
+      expect(values(result.current.items)).toEqual(["banana"]);
 
       act(() => result.current.undo());
 
-      expect(result.current.items).toEqual(["apple", "banana", "cherry"]);
+      expect(values(result.current.items)).toEqual(["apple", "banana", "cherry"]);
     });
 
     it("clears selection when undoing", () => {
@@ -85,7 +98,7 @@ describe("useList", () => {
       });
 
       act(() => result.current.undo());
-      expect(result.current.items).toEqual(["apple"]);
+      expect(values(result.current.items)).toEqual(["apple"]);
 
       act(() => result.current.undo());
       expect(result.current.items).toEqual([]);
@@ -100,8 +113,8 @@ describe("useList", () => {
 
       act(() => result.current.removeSelected());
 
-      expect(result.current.items).toEqual(["apple"]);
-      expect(result.current.canUndo).toBe(true); // only the add is in history
+      expect(values(result.current.items)).toEqual(["apple"]);
+      expect(result.current.canUndo).toBe(true);
     });
 
     it("removes all selected items", () => {
@@ -116,7 +129,7 @@ describe("useList", () => {
 
       act(() => result.current.removeSelected());
 
-      expect(result.current.items).toEqual(["banana"]);
+      expect(values(result.current.items)).toEqual(["banana"]);
     });
 
     it("clears selection after removing", () => {
@@ -142,7 +155,7 @@ describe("useList", () => {
 
       act(() => result.current.removeByDoubleClick(0));
 
-      expect(result.current.items).toEqual(["banana"]);
+      expect(values(result.current.items)).toEqual(["banana"]);
     });
 
     it("clears the selection after removal", () => {
@@ -157,7 +170,6 @@ describe("useList", () => {
 
       expect(result.current.selected).toEqual(new Set());
     });
-
   });
 
   describe("toggleSelect", () => {
@@ -202,7 +214,7 @@ describe("useList", () => {
 
       act(() => result.current.addItem("apple"));
 
-      expect(result.current.items).toEqual(["apple"]);
+      expect(values(result.current.items)).toEqual(["apple"]);
       expect(result.current.canUndo).toBe(true);
     });
 
@@ -214,7 +226,21 @@ describe("useList", () => {
         result.current.addItem("banana");
       });
 
-      expect(result.current.items).toEqual(["apple", "banana"]);
+      expect(values(result.current.items)).toEqual(["apple", "banana"]);
+    });
+
+    it("assigns a unique stable id to each item", () => {
+      const { result } = renderHook(() => useList());
+
+      act(() => {
+        result.current.addItem("apple");
+        result.current.addItem("banana");
+      });
+
+      const [a, b] = result.current.items;
+      expect(a.id).toBeTruthy();
+      expect(b.id).toBeTruthy();
+      expect(a.id).not.toBe(b.id);
     });
   });
 });
