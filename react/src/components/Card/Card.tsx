@@ -28,7 +28,7 @@ export const Card = ({
           <ul id="item-list">
             {items.map((item, index) => (
               <li
-                key={index}
+                key={crypto.randomUUID()}
                 className={selected.has(index) ? "list-item--active" : ""}
                 onClick={() => onToggleSelect(index)}
                 onDoubleClick={() => onDoubleClickItem(index)}
