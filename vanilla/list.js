@@ -80,9 +80,3 @@ const createList = (listElement, removeButton, undoButton) => {
   return { renderItems, addItem };
 };
 
-window.listApi = createList(
-  document.getElementById("item-list"),
-  document.getElementById("remove-item-button"),
-  document.getElementById("undo-item-button"),
-);
-window.listApi.renderItems();

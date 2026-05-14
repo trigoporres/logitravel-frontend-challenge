@@ -52,5 +52,20 @@
     </dialog>
     <script src="list.js"></script>
     <script src="modal.js"></script>
+    <script>
+      const list = createList(
+        document.getElementById("item-list"),
+        document.getElementById("remove-item-button"),
+        document.getElementById("undo-item-button"),
+      );
+      list.renderItems();
+      initModal({
+        modal: document.getElementById("item-modal"),
+        input: document.getElementById("new-item-input"),
+        openModalButton: document.getElementById("open-modal-button"),
+        cancelModalButton: document.getElementById("cancel-modal-button"),
+        onAddItem: list.addItem,
+      });
+    </script>
   </body>
 </html>
